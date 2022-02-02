@@ -1,6 +1,6 @@
 /**
  * @file merge-names.cpp
- * @author nirmeet baweja (you@domain.com)
+ * @author nirmeet baweja
  * @brief Implement the unique_names method. When passed two vectors of names,
  * it will return a vector containing the names that appear in either or both
  * vectors. The returned vector should have no duplicates.
