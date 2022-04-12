@@ -46,3 +46,84 @@ double Perceptron::sigmoid(double x)
 {
   return 1.0 / (1.0 + exp(-x));
 }
+
+/**
+ * @brief Constructor for MultiLayerPerceptron class
+ *
+ */
+MultiLayerPerceptron::MultiLayerPerceptron(vector<int> layers, double bias, double eta)
+{
+  this->layers = layers;
+  this->bias = bias;
+  this->eta = eta;
+
+  for (unsigned long int i = 0; i < layers.size(); i++)
+  {
+    values.push_back(vector<double>(layers[i], 0.0));
+    network.push_back(vector<Perceptron>());
+    if (i > 0)
+    {
+      for (int j = 0; j < layers[i]; j++)
+      {
+        network[i].push_back(Perceptron(layers[i - 1], bias));
+      }
+    }
+  }
+}
+
+/**
+ * @brief set the weights of the multi-layer perceptron network
+ *
+ */
+void MultiLayerPerceptron::set_weights(vector<vector<vector<double>>> w_init)
+{
+  /**
+   * w_init will have one less layer because the input layer
+   * is not a layer of perceptrons
+   */
+  for (unsigned long int i = 0; i < w_init.size(); i++)
+  {
+    for (unsigned long int j = 0; j < w_init[i].size(); j++)
+    {
+      network[i + 1][j].set_weights(w_init[i][j]);
+    }
+  }
+}
+
+/**
+ * @brief print the weights of the multi-layer perceptron network
+ *
+ */
+void MultiLayerPerceptron::print_weights()
+{
+  cout << endl;
+  for (unsigned long int i = 0; i < network.size(); i++)
+  {
+    for (int j = 0; j < layers[i]; j++)
+    {
+      cout << "Layer " << i + 1 << "Neuron " << j << ": ";
+      for (auto &it : network[i][j].weights)
+      {
+        cout << it << " ";
+      }
+      cout << endl;
+    }
+  }
+}
+
+/**
+ * @brief feed a sample input x into the multilayer perceptron
+ *
+ */
+vector<double> MultiLayerPerceptron::run(vector<double> x)
+{
+  values[0] = x;
+  for (unsigned long int i = 0; i < network.size(); i++)
+  {
+    for (int j = 0; j < layers[i]; j++)
+    {
+      values[i][j] = network[i][j].run(values[i - 1]);
+    }
+  }
+  return values.back();
+}
