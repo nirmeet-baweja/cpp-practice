@@ -18,4 +18,4 @@ public:
   double run(vector<double> x);
   void set_weights(vector<double> w_init);
   double sigmoid(double x);
-}
+};
