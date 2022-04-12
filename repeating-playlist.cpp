@@ -50,7 +50,7 @@ public:
 
     Song *currentSong = this;
 
-    while (currentSong->nextSong != NULL)
+    while (currentSong != NULL)
     {
       std::cout << "current song: " << currentSong->name << '\n';
       if (vector_includes_name(previousSongs, currentSong->name))
@@ -83,3 +83,22 @@ int main()
   std::cout << std::boolalpha << first->isRepeatingPlaylist();
 }
 #endif
+
+// bool isRepeatingPlaylist()
+// {
+//   std::cout << "Checking is repeating\n";
+//   std::cout << this->name << '\n';
+
+//   Song *currentSong = this->nextSong;
+
+//   while (currentSong != NULL)
+//   {
+//     std::cout << "current song: " << currentSong->name << '\n';
+//     if (currentSong->name == this->name)
+//     {
+//       return true;
+//     }
+//     currentSong = currentSong->nextSong;
+//   }
+//   return false;
+// }
