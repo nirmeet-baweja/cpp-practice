@@ -97,11 +97,11 @@ void MultiLayerPerceptron::set_weights(vector<vector<vector<double>>> w_init)
 void MultiLayerPerceptron::print_weights()
 {
   cout << endl;
-  for (unsigned long int i = 0; i < network.size(); i++)
+  for (unsigned long int i = 1; i < network.size(); i++)
   {
     for (int j = 0; j < layers[i]; j++)
     {
-      cout << "Layer " << i + 1 << "Neuron " << j << ": ";
+      cout << "Layer " << i + 1 << " Neuron " << j << ": ";
       for (auto &it : network[i][j].weights)
       {
         cout << it << " ";
@@ -118,7 +118,7 @@ void MultiLayerPerceptron::print_weights()
 vector<double> MultiLayerPerceptron::run(vector<double> x)
 {
   values[0] = x;
-  for (unsigned long int i = 0; i < network.size(); i++)
+  for (unsigned long int i = 1; i < network.size(); i++)
   {
     for (int j = 0; j < layers[i]; j++)
     {
