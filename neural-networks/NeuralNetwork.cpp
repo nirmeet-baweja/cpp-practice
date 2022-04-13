@@ -37,4 +37,36 @@ int main()
   cout << "(0,1): " << mlp.run({0, 1})[0] << endl;
   cout << "(1,0): " << mlp.run({1, 0})[0] << endl;
   cout << "(1,1): " << mlp.run({1, 1})[0] << endl;
+
+  cout << "\n\n------------------Trained XOR Example------------------\n\n";
+  MultiLayerPerceptron trained_mlp = MultiLayerPerceptron({2, 2, 1});
+
+  cout << "\nTraining NN as XOR Gate\n";
+  double mse;
+  for (int i = 0; i < 3000; i++)
+  {
+
+    mse = 0.0;
+    mse += trained_mlp.bp({0, 0}, {0});
+    mse += trained_mlp.bp({0, 1}, {1});
+    mse += trained_mlp.bp({1, 0}, {1});
+    mse += trained_mlp.bp({1, 1}, {0});
+
+    mse = mse / 4.0;
+
+    if (i % 100 == 0)
+    {
+      cout << "MSE : " << mse << endl;
+    }
+  }
+
+  cout << "\nTrained weights:\n";
+  trained_mlp.print_weights();
+
+  cout << "XOR Gate: " << endl;
+  cout << "(0,0): " << trained_mlp.run({0, 0})[0] << endl;
+  cout << "(0,1): " << trained_mlp.run({0, 1})[0] << endl;
+  cout << "(1,0): " << trained_mlp.run({1, 0})[0] << endl;
+  cout << "(1,1): " << trained_mlp.run({1, 1})[0] << endl;
+
 }
