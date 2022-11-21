@@ -17,8 +17,8 @@ void depth_first_traversal(unordered_map<char, vector<char>>& graph,
     node_stack.pop();
 
     cout << current_node << endl;
-    vector<char> neighbours = graph[current_node];
 
+    vector<char> neighbours = graph[current_node];
     for (int i = 0; i<neighbours.size(); i++)
     {
       node_stack.push(neighbours[i]);
