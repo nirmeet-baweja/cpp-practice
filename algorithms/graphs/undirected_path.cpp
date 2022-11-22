@@ -44,7 +44,7 @@ unordered_map<char, vector<char>> build_graph(vector<vector<char>>& edges)
 }
 
 bool has_path(unordered_map<char, vector<char>>& graph,
-              char source, char dest, vector<char> visited={})
+              char source, char dest, vector<char>& visited)
 {
   cout << "\nFunction call:" << endl;
   cout << "\nSource: " << source << endl;
@@ -83,18 +83,24 @@ bool has_path(unordered_map<char, vector<char>>& graph,
   return false;
 }
 
+bool undirected_path(vector<vector<char>>& edges, char source, char dest)
+{
+  unordered_map<char, vector<char>> graph = build_graph(edges);
+  vector<char> visited;
+  return has_path(graph, source, dest, visited);
+}
+
 int main()
 {
   vector<vector<char>> edges{{'i', 'j'}, {'k', 'i'}, {'m', 'k'}, {'k', 'l'}, {'o', 'n'}, {'j', 'k'}};
 
-  unordered_map<char, vector<char>> graph = build_graph(edges);
   char source = 'k';
   char dest = 'l';
   char dest2 = 'o';
   cout << "\n*******************************************\n";
   cout << "\n"
-       << has_path(graph, source, dest) << endl;
+       << undirected_path(edges, source, dest) << endl;
   cout << "\n*******************************************\n";
   cout << "\n"
-       << has_path(graph, source, dest2) << endl;
+       << undirected_path(edges, source, dest2) << endl;
 }
