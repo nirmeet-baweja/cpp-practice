@@ -32,7 +32,7 @@ unordered_map<string, vector<string>> build_graph(
     // string first;
     // string second;
     // std::tie(first, second) = edges[i];
-    auto [ first, second ] = edge;
+    auto [ first, second ] = edge; // unpacking values from tuple
     graph[first].push_back(second);
     graph[second].push_back(first);
   }

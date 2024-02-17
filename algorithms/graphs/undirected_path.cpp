@@ -43,6 +43,7 @@ unordered_map<char, vector<char>> build_graph(vector<vector<char>>& edges)
   return graph;
 }
 
+// checking if path exists using BFS
 bool has_path(unordered_map<char, vector<char>>& graph,
               char source, char dest, vector<char>& visited)
 {
